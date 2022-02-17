@@ -20,8 +20,8 @@ public class Character: MonoBehaviour
     public string name;
     pubilc float speed;
     //(other fields)
-    pubilc void Walk(int foward){}/*由控制器调用*/
-    pubilc void OnWalk(){}/*由游戏主更新器调用*/
+    public void Walk(int foward){}/*由控制器调用*/
+    public void OnWalk(){}/*由游戏主更新器调用*/
     public void Damaged(float DamagedValue){}
     //(other methods)
 }
@@ -32,7 +32,7 @@ public class Character: MonoBehaviour
 使用一个单例物品贴图管理器来实时返回需要的sprite，通过预定义的表格加载AssetsBundle中的Sprite资源
 
 ```c#
-public class ItemSpriteManager: Singlon<ItemSpriteManager>
+public class ItemSpriteManager: Singleton<ItemSpriteManager>
 {
     //(fields)
     void LoadSpriteFromAssetsBundle(){}
@@ -56,7 +56,7 @@ public class ItemSpriteManager: Singlon<ItemSpriteManager>
 
 处理方法类似**物品**，使用一个单例文本管理器，便于进行本地化（？），虽然我不认为这个游戏会出外语版本。
 ```c#
-public class TextsManager: Singlon<TextsManager>
+public class TextsManager: Singleton<TextsManager>
 {
     ArrayList strings;
     HashSet<Text> gameTexts;
@@ -83,7 +83,7 @@ public class TextsManager: Singlon<TextsManager>
 使用一个单例音乐播放器，储存并播放音乐
 
 ```c#
-public class MusicManager: Singlon<MusicManager>
+public class MusicManager: Singleton<MusicManager>
 {
     //(fields)
     void LoadMusicFromAssetsBundle()
@@ -97,13 +97,13 @@ public class MusicManager: Singlon<MusicManager>
 
 使用一个单例，管理来自键盘的输入，并且
 ```c#
-public class GameController: Singlon<GameController>
+public class GameController: Singleton<GameController>
 {
     //(fields)
     public void OnUpdate()/*由游戏主更新器调用*/
     {
         //一个示意，通过实时获取操作的按键来实现操作改键
-        if (Input.GetKey(KeycodeManager.Instance.GetKeycode("HeroWalkLeft"))
+        if (Input.GetKey(KeycodeManager.Instance.GetKeycode("HeroWalkLeft")))
         {
             Hero.Walk(-1);    
         }
@@ -112,7 +112,7 @@ public class GameController: Singlon<GameController>
 }
 ```
 ```c#
-public class KeycodeManager: Singlon<KeycodeManager>
+public class KeycodeManager: Singleton<KeycodeManager>
 {
     //(fields)
     public int GetKeycode(string operationName){}
